@@ -1,0 +1,42 @@
+local screengui = Instance.new("ScreenGui") -- creates the screengui for the library to work
+
+screengui.Name = "screengui"
+screengui.Parent = game.CoreGui
+
+local function Window(text,style,rounded)
+	--window elements
+	local main = Instance.new("Frame") -- creates new mainframe
+	main.Name = "main"
+	main.Parent = screengui
+	main.Active = true
+	main.Draggable = true
+	main.Position = UDim2.new(0,0,0,0)
+	main.Size = UDim2.new(0,500,0,350)
+	main.BorderSizePixel = 0
+	
+	local title = Instance.new("TextLabel") -- creates the title for the mainframe
+	title.Name = "title"
+	title.Parent = main
+	title.Position = UDim2.new(0,0,0,0)
+	title.Size = UDim2.new(1,0,0,50)
+	title.TextSize = 40
+	title.BorderSizePixel = 0
+	title.Font = Enum.Font.Nunito
+	title.Text = text
+	
+	--window styles
+	if style == "Light" then
+		main.BackgroundColor3 = Color3.fromRGB(255,255,255)
+		title.BackgroundColor3 = Color3.fromRGB(255,255,255)
+	end
+	if style == "Dark" then
+		main.BackgroundColor3 = Color3.fromRGB(50,50,50)
+		title.BackgroundColor3 = Color3.fromRGB(50,50,50)
+	end
+	if rounded == true then
+		local corner1 = Instance.new("UICorner")
+		local corner2 = Instance.new("UICorner")
+		corner1.Parent = main
+		corner2.Parent = title
+	end
+end
