@@ -1,42 +1,58 @@
 local blockyplate = {}
 
-function blockyplate.newWindow(text,style,rounded)
-	local screengui = Instance.new("ScreenGui") -- creates the screengui for the library to work
-	screengui.Name = "screengui"
-	screengui.Parent = game.CoreGui
-	--window elements
-	local main = Instance.new("Frame") -- creates new mainframe
-	main.Name = "main"
-	main.Parent = screengui
-	main.Active = true
-	main.Draggable = true
-	main.Position = UDim2.new(0,0,0,0)
-	main.Size = UDim2.new(0,500,0,350)
-	main.BorderSizePixel = 0
+local styles = {
+	Dark = {
+		rgb1 = Color3.fromRGB(50,50,50),
+		rgb2 = Color3.fromRGB(25,25,25),
+		rgb3 = Color3.fromRGB(200,200,200),
+	},
+	Light = {
+		rgb1 = Color3.fromRGB(255,255,255),
+		rgb2 = Color3.fromRGB(200,200,200),
+		rgb3 = Color3.fromRGB(50,50,50),
+	}
+}
+
+local bpname = tostring(math.random(1,100))..tostring(math.random(1,50))..tostring(math.random(1,100))
+
+function blockyplate.ToggleUI()
+	if game.CoreGui[bpname].Enabled then
+		game.CoreGui[bpname].Enabled = false
+	else
+		game.CoreGui[bpname].Enabled = true
+	end
+end
+
+function blockyplate.CreateLib(blockyName, stylelist)
+	if not stylelist then
+		stylelist = styles
+	end
+	if stylelist == "Dark" then
+		stylelist = styles.Dark
+	elseif stylelist == "Light" then
+		stylelist = styles.Light
+	end
+	stylelist = stylelist or {}
+	local selectedTab 
+	blockyName = blockyName or "Library"
+	table.insert(blockyplate, bpName)
+	for i,v in pairs(game.CoreGui:GetChildren()) do
+		if v:IsA("ScreenGui") and v.Name == blockyName then
+			v:Destroy()
+		end
+	end
+	local ScreenGui = Instance.new("ScreenGui")
+	local Main = Instance.new("Frame")
 	
-	local title = Instance.new("TextLabel") -- creates the title for the mainframe
-	title.Name = "title"
-	title.Parent = main
-	title.Position = UDim2.new(0,0,0,0)
-	title.Size = UDim2.new(1,0,0,50)
-	title.TextSize = 40
-	title.BorderSizePixel = 0
-	title.Font = Enum.Font.Nunito
-	title.Text = text
+	ScreenGui.Parent = game.CoreGui
+	ScreenGui.Name = bpname
+	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	ScreenGui.ResetOnSpawn = false
 	
-	--window styles
-	if style == "Light" then
-		main.BackgroundColor3 = Color3.fromRGB(255,255,255)
-		title.BackgroundColor3 = Color3.fromRGB(255,255,255)
-	end
-	if style == "Dark" then
-		main.BackgroundColor3 = Color3.fromRGB(50,50,50)
-		title.BackgroundColor3 = Color3.fromRGB(50,50,50)
-	end
-	if rounded == true then
-		local corner1 = Instance.new("UICorner")
-		local corner2 = Instance.new("UICorner")
-		corner1.Parent = main
-		corner2.Parent = title
-	end
+	Main.Name = "Main"
+	Main.Parent = ScreenGui
+	Main.BackgroundColor3 = stylelist.Background
+	Main.ClipsDescendants = true
+	Main.Position = UDim2.new(0.336503863, 0, 0.275485456, 0)
+	Main.Size = UDim2.new(0, 525, 0, 318)
 end
