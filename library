@@ -1,9 +1,11 @@
+local blockyplate = {}
+
 local screengui = Instance.new("ScreenGui") -- creates the screengui for the library to work
 
 screengui.Name = "screengui"
 screengui.Parent = game.CoreGui
 
-local function Window(text,style,rounded)
+function blockyplate:newWindow(text,style,rounded)
 	--window elements
 	local main = Instance.new("Frame") -- creates new mainframe
 	main.Name = "main"
