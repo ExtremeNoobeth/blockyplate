@@ -35,7 +35,7 @@ function blockyplate.CreateLib(blockyName, stylelist)
 	stylelist = stylelist or {}
 	local selectedTab 
 	blockyName = blockyName or "Library"
-	table.insert(blockyplate, bpName)
+	table.insert(blockyplate, blockyName)
 	for i,v in pairs(game.CoreGui:GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == blockyName then
 			v:Destroy()
